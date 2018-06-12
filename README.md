@@ -26,6 +26,7 @@ git clone https://github.com/edsperanto/payslip
 Change directory into the repository and run
 
 ```
+npm install
 npm run dev -- -p [port_num]
 ```
 
