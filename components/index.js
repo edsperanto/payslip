@@ -36,11 +36,21 @@ class AppProvider extends Component {
             // stare in session storage
             var data = JSON.stringify(this.state.employees);
             window.sessionStorage.setItem("employees", data);
-            console.log(this.state.employees);
         },
         viewResults: e => {
             e.preventDefault();
         }
+    }
+
+    componentDidMount() {
+        var storedData = window.sessionStorage.getItem("employees");
+        var originalData = JSON.parse(storedData);
+        console.log(originalData);
+        var arrayOfObjs = originalData.map(employee => {
+            let {_firstName, _lastName, _salary, _rate, _startDate} = employee;
+            return new Employee(_firstName, _lastName, _salary, _rate, _startDate);
+        });
+        this.setState({employees: arrayOfObjs});
     }
 
     render() {

@@ -21,7 +21,11 @@ export default class Employee {
         this._lastName = lastName;
         this._salary = salary;
         this._rate = rate;
-        this._startDate = moment(startDate, START_DATE_FORMAT);
+        if(startDate.length > 5) {
+            this._startDate = moment(startDate);
+        } else {
+            this._startDate = moment(startDate, START_DATE_FORMAT);
+        }
     }
 
     get name() {

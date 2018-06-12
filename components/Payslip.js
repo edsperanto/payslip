@@ -6,6 +6,12 @@ const Payslip = ({ employee }) => {
         <div>{`Income Tax: ${employee.incomeTax}`}</div>
         <div>{`Net Income: ${employee.netIncome}`}</div>
         <div>{`Super Amount: ${employee.superAmount}`}</div>
+        <style jsx>{`
+            li {
+                border: 2px solid black;
+                padding: 0.5rem;
+            }
+        `}</style>
     </li>
 };
 
