@@ -53,6 +53,13 @@ export default class extends React.Component {
                     padding: 0;
                     border: 2px solid black;
                 }
+                button {
+                    border: 1px solid black;
+                    background-color: LightSeaGreen;
+                    font-size: 1.2rem;
+                    color: white;
+                    margin: 0.5rem;
+                }
             `}</style>
         </Layout>
     }
