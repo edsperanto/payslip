@@ -1,16 +1,27 @@
+// dependencies
+import moment from "moment";
+
 // constants
 const MONTH_IN_YEAR = 12;
+const START_DATE_FORMAT = "MM-DD";
+const BRACKET_4_INCOME = 180000;
+const BRACKET_3_INCOME = 87000;
+const BRACKET_2_INCOME = 37000;
+const BRACKET_1_INCOME = 18200;
+const BRACKET_4_TAX = 0.45;
+const BRACKET_3_TAX = 0.37;
+const BRACKET_2_TAX = 0.325;
+const BRACKET_1_TAX = 0.19;
 
 // class definition
 export default class Employee {
 
-    // input details: first name, last name, annual salary, rate, start date
     constructor(firstName, lastName, salary, rate, startDate) {
         this._firstName = firstName;
         this._lastName = lastName;
         this._salary = salary;
         this._rate = rate;
-        this._startDate = startDate;
+        this._startDate = moment(startDate, START_DATE_FORMAT);
     }
 
     get name() {
@@ -18,7 +29,9 @@ export default class Employee {
     }
 
     get payPeriod() {
-        return this._startDate;
+        const payPeriodStart = this._startDate.format("DD MMM");
+        const payPeriodEnd = this._startDate.add(1, "months").format("DD MMM");
+        return `${payPeriodStart} - ${payPeriodEnd}`;
     }
 
     get grossIncome() {
@@ -26,13 +39,40 @@ export default class Employee {
     }
 
     get incomeTax() {
-        // placeholder write full logic later
-        return this._salary * this._rate;
+
+        // variables
+        var bracketTaxAmount, totalTax = 0;
+        var taxableIncome = this._salary;
+
+        // calculations
+        if(taxableIncome > BRACKET_4_INCOME) {
+            bracketTaxAmount = taxableIncome - BRACKET_4_INCOME;
+            totalTax += (bracketTaxAmount) * BRACKET_4_TAX;
+            taxableIncome -= bracketTaxAmount;
+        }
+        if(taxableIncome > BRACKET_3_INCOME) {
+            bracketTaxAmount = taxableIncome - BRACKET_3_INCOME;
+            totalTax += (bracketTaxAmount) * BRACKET_3_TAX;
+            taxableIncome -= bracketTaxAmount;
+        }
+        if(taxableIncome > BRACKET_2_INCOME) {
+            bracketTaxAmount = taxableIncome - BRACKET_2_INCOME;
+            totalTax += (bracketTaxAmount) * BRACKET_2_TAX;
+            taxableIncome -= bracketTaxAmount;
+        }
+        if(taxableIncome > BRACKET_1_INCOME) {
+            bracketTaxAmount = taxableIncome - BRACKET_1_INCOME;
+            totalTax += (bracketTaxAmount) * BRACKET_1_TAX;
+            taxableIncome -= bracketTaxAmount;
+        }
+
+        // return result
+        return Math.round(totalTax);
+
     }
 
     get netIncome() {
-        // questions regarding tax calculations
-        return this.grossIncome - this.incomeTax / MONTH_IN_YEAR;
+        return Math.round(this.grossIncome - this.incomeTax / MONTH_IN_YEAR);
     }
 
     get superAmount() {

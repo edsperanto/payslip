@@ -3,7 +3,7 @@ import helpers from "../helpers";
 const { Employee } = helpers;
 
 // testing ground
-var Edward = new Employee("Edward", "Gao", 1000, 0.09, 2);
+var Edward = new Employee("Edward", "Gao", 180000, 0.09, "03-18");
 
 export default () => (
     <div>
