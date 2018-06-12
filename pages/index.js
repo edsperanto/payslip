@@ -1,32 +1,12 @@
 // import dependencies
 import React, { Component } from "react";
+import Link from "next/link";
 import Components from "../components";
+const { AppContext, AppProvider } = Components;
 const { Layout, InputForm, Payslip } = Components;
-import helpers from "../helpers";
-const { Employee } = helpers;
-
-// use Context API instead of Redux
-const AppContext = React.createContext();
-class AppProvider extends Component {
-
-    state = {
-        Edward: new Employee("Edward", "Gao", 180000, 0.09, "03-18"),
-        pi: 3.1415926,
-        setPi: num => {
-            this.setState({pi: num});
-        }
-    }
-
-    render() {
-        return <AppContext.Provider value={this.state}>
-            {this.props.children}
-        </AppContext.Provider>
-    }
-
-}
 
 // main app component
-export default class extends React.Component {
+export default class extends Component {
     render() {
         return <AppProvider>
             <Layout title="Payslip">
@@ -37,6 +17,8 @@ export default class extends React.Component {
                 <br />
 
                 /* testing */
+                <br />
+                <Link href="/test"><a>here</a></Link>
                 <h2>
                     <AppContext.Consumer>
                         {context => context.pi}
