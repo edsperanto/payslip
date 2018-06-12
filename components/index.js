@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Layout from "./Layout";
 import InputForm from "./InputForm";
+import Preview from "./Preview";
 import Payslip from "./Payslip";
 import helpers from "../helpers";
 const { Employee } = helpers;
@@ -10,10 +11,35 @@ const AppContext = React.createContext();
 class AppProvider extends Component {
 
     state = {
-        Edward: new Employee("Edward", "Gao", 180000, 0.09, "03-18"),
-        pi: 3.1415926,
-        setPi: num => {
-            this.setState({pi: num});
+        editing: {},
+        employees: [],
+        change: prop => {
+            return e => {
+                let value = e.target.value;
+                e.preventDefault();
+                this.setState({editing: Object.assign({},
+                    this.state.editing, { [prop]: value }
+                )});
+            }
+        },
+        submit: e => {
+            // prevent default
+            e.preventDefault();
+            // create new employee
+            let editing = this.state.editing;
+            let {fn, ln, salary, rate, startDate} = editing;
+            let emp = new Employee(fn, ln, salary, rate, startDate);
+            // add to employee list
+            let newEmployees = this.state.employees;
+            newEmployees.push(emp);
+            this.setState({employees: newEmployees});
+            // stare in session storage
+            var data = JSON.stringify(this.state.employees);
+            window.sessionStorage.setItem("employees", data);
+            console.log(this.state.employees);
+        },
+        viewResults: e => {
+            e.preventDefault();
         }
     }
 
@@ -30,5 +56,6 @@ export default {
     AppProvider,
     Layout, 
     InputForm,
+    Preview,
     Payslip
 };

@@ -3,44 +3,53 @@ import React, { Component } from "react";
 import Link from "next/link";
 import Components from "../components";
 const { AppContext, AppProvider } = Components;
-const { Layout, InputForm, Payslip } = Components;
+const { Layout, InputForm, Preview, Payslip } = Components;
 
 // main app component
 export default class extends Component {
     render() {
         return <AppProvider>
-            <Layout title="Payslip">
+            <Layout title="Create Payslips">
 
-                <AppContext.Consumer>
-                    {context => <Payslip employee={context.Edward}></Payslip>}
-                </AppContext.Consumer>
-                <br />
-
-                /* testing */
-                <br />
-                <Link href="/test"><a>here</a></Link>
-                <h2>
+                <div id="header">
+                    <h1>Create Payslips</h1>
+                </div>
+                <div id="content">
                     <AppContext.Consumer>
-                        {context => context.pi}
+                        {context => <InputForm 
+                            change={context.change}
+                            submit={context.submit}>
+                        </InputForm>}
                     </AppContext.Consumer>
-                </h2>
-                <AppContext.Consumer>
-                    {context => <form>
-                        <input
-                        onChange={ e => {
-                            e.preventDefault();
-                            context.setPi(4);
-                        } }
-                        />
-                        <button onClick={context.setPi}>SET</button>
-                    </form>
-                    }
-                </AppContext.Consumer>
-                /* testing */
+                    <div id="preview">
+                        <div id="preview-title">Preview List</div>
+                        <ul><AppContext.Consumer>
+                            {context => context.employees.map(employee => {
+                                return <Preview employee={employee}></Preview>
+                            })}
+                        </AppContext.Consumer></ul>
+                    </div>
+                </div>
 
                 <style jsx>{`
+                    #header {
+                        background-color: LightSeaGreen;
+                        padding: 0.5rem;
+                    }
                     h1 {
-                        font-size: 2rem;
+                        font-size: 2.5rem;
+                        color: white;
+                        margin: 0;
+                    }
+                    #content {
+                        border: 2px solid black;
+                    }
+                    #preview {
+                        padding: 0.5rem;
+                        border: 2px solid black;
+                    }
+                    #preview-title {
+                        font-size: 1.5rem;
                     }
                 `}</style>
 
