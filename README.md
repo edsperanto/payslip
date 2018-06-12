@@ -37,6 +37,27 @@ localhost:[port_num]
 
 into your browser address bar.
 
+### Test Input
+
+| Field | Value |
+| --- | --- |
+| First Name | Edward |
+| Last Name | Gao |
+| Annual Salary | 10000 |
+| Super Rate | 0.9 |
+| Payment Start Date | 06-22 |
+
+### Test Output
+
+| Field | Value |
+| --- | --- |
+| Name | Edward Gao |
+| Pay Period | 22 Jun - 22 Jul |
+| Gross Income | $833 |
+| Income Tax | $0 |
+| Net Income | $833 |
+| Super Amount | $750 |
+
 ### How it's made
 
 This Single Page Application was created using [Node.js](https://nodejs.org/en/), [React](https://reactjs.org/), [Next.js](https://nextjs.org/), and [Moment.js](https://momentjs.com/).
