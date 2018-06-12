@@ -12,13 +12,15 @@ export default class extends React.Component {
     }
     componentDidMount() {
         var storedData = window.sessionStorage.getItem("employees");
-        var originalData = JSON.parse(storedData);
-        console.log(originalData);
-        var arrayOfObjs = originalData.map(employee => {
-            let {_firstName, _lastName, _salary, _rate, _startDate} = employee;
-            return new Employee(_firstName, _lastName, _salary, _rate, _startDate);
-        });
-        this.setState({employees: arrayOfObjs});
+        if(!!storedData) {
+            var originalData = JSON.parse(storedData);
+            console.log(originalData);
+            var arrayOfObjs = originalData.map(employee => {
+                let {_firstName, _lastName, _salary, _rate, _startDate} = employee;
+                return new Employee(_firstName, _lastName, _salary, _rate, _startDate);
+            });
+            this.setState({employees: arrayOfObjs});
+        }
     }
     render() {
         return <Layout title="Payslip Results">

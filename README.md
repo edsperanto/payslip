@@ -26,8 +26,16 @@ git clone https://github.com/edsperanto/payslip
 Change directory into the repository and run
 
 ```
-npm run dev
+npm run dev -- -p [port_num]
 ```
+
+Finally, you can visit the site on your computer by typing
+
+```
+localhost:[port_num]
+```
+
+into your browser address bar.
 
 ### How it's made
 
