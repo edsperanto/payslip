@@ -29,6 +29,10 @@ export default class Employee {
         }
     }
 
+    set id(id) {
+        this._id = id;
+    }
+
     set firstName(fn) {
         this._firstName = fn;
     }

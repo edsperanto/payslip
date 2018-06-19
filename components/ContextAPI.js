@@ -28,6 +28,9 @@ class AppProvider extends Component {
             let newEmployees = this.state.employees;
             newEmployees.push(emp);
             await this.setState({employees: newEmployees});
+            // clear editing and reset form
+            await this.setState({editing: {}});
+            document.getElementById("inputForm").reset();
             // store in session storage
             await this.storeInSessionStorage();
         },
@@ -36,6 +39,8 @@ class AppProvider extends Component {
             e.preventDefault();
             // edit employee
             let {id, fn, ln, salary, rate, startDate} = this.state.editing;
+            console.log("EDITING");
+            console.log(this.state.editing);
             let newArr = this.state.employees.map(async (employee) => {
                 if(employee.id == id) {
                     employee.firstName = fn;
@@ -44,12 +49,13 @@ class AppProvider extends Component {
                     employee.rate = rate;
                     employee.startDate = startDate;
                 }
+                return employee;
             });
-            // update employee list
-            await this.setState({employees: newArr});
             // clear editing and revert to new employee mode
             await this.setState({editing: {}});
             await this.setState({mode: "New"});
+            // reset form
+            document.getElementById("inputForm").reset();
             // store in session storage
             this.storeInSessionStorage();
         },
@@ -59,7 +65,7 @@ class AppProvider extends Component {
             // clear editing and revert to new employee mode
             await this.setState({editing: {}});
             await this.setState({mode: "New"});
-            // clear form
+            // reset form
             document.getElementById("inputForm").reset();
         },
         edit: async (e) => {
@@ -78,6 +84,7 @@ class AppProvider extends Component {
                         _rate: rate,
                         _startDate: startDate
                     } = employee;
+                    startDate = startDate.format("MM-DD");
                     let editEmployee = {id, fn, ln, salary, rate, startDate};
                     await this.setState({editing: Object.assign({},
                         this.state.editing, editEmployee

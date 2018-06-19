@@ -1,4 +1,3 @@
-import moment from "moment";
 import React, { Component } from "react";
 import Link from "next/link";
 import { AppContext, AppProvider } from "./ContextAPI";
@@ -8,10 +7,6 @@ export default class extends Component {
         return <AppContext.Consumer>{
             ({mode, change, create, submit, cancel, viewResults, editing}) => {
                 let {fn, ln, salary: s, rate: r, startDate: sd} = editing;
-                let time = moment(sd);
-                let month = time.format("MM");
-                let date = time.format("DD");
-                sd = (mode == "New") ? "" : `${month}-${date}`;
 
                 return <form id="inputForm">
                     <div id="input-title">{mode} Employee</div>
@@ -37,7 +32,7 @@ export default class extends Component {
                     </div>
                     { (mode == "New") ? (
                         <div>
-                            <button onClick={create}>New</button>
+                            <button onClick={create}>Create</button>
                             <Link href="/results">
                                 <button onClick={viewResults}>Results</button>
                             </Link>
