@@ -46,7 +46,11 @@ export default class Employee {
     }
 
     set startDate(sd) {
-        this._startDate = sd;
+        if(sd.length > 5) {
+            this._startDate = moment(sd);
+        } else {
+            this._startDate = moment(sd, START_DATE_FORMAT);
+        }
     }
 
     get id() {

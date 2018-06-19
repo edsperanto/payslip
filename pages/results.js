@@ -29,7 +29,10 @@ export default class extends React.Component {
             <ul>
             {
                 this.state.employees.map(employee => {
-                    return <Payslip employee={employee}></Payslip>
+                    return <Payslip 
+                        id={employee.id}
+                        employee={employee} 
+                    />
                 })
             }
             </ul>

@@ -5,10 +5,10 @@ export default class extends Component {
     render() {
         var {name, id} = this.props.employee;
         return <AppContext.Consumer>{
-            ({ toggleEdit }) => (<li id={id}>
-                <div id="name">{name} ({id})</div>
-                <button id="edit" onClick={toggleEdit}>Edit</button>
-                <button id="del">Delete</button>
+            ({ edit, del }) => (<li id={id}>
+                <div id="name">{name}</div>
+                <button id="edit" onClick={edit}>Edit</button>
+                <button id="del" onClick={del}>Delete</button>
                 <style jsx>{`
                     li {
                         display: flex;
@@ -18,6 +18,7 @@ export default class extends Component {
                     }
                     div {
                         margin: 0;
+                        cursor: default;
                     }
                     #name {
                         flex: 1;
