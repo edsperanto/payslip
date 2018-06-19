@@ -33,6 +33,7 @@ export default class extends Component {
                     margin: 0;
                     height: 100%;
                     position: relative;
+                    user-select: none;
                 }
 
                 a {

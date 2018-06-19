@@ -39,9 +39,7 @@ class AppProvider extends Component {
             e.preventDefault();
             // edit employee
             let {id, fn, ln, salary, rate, startDate} = this.state.editing;
-            console.log("EDITING");
-            console.log(this.state.editing);
-            let newArr = this.state.employees.map(async (employee) => {
+            this.state.employees.map(async (employee) => {
                 if(employee.id == id) {
                     employee.firstName = fn;
                     employee.lastName = ln;

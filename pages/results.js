@@ -30,7 +30,7 @@ export default class extends React.Component {
             {
                 this.state.employees.map(employee => {
                     return <Payslip 
-                        id={employee.id}
+                        key={employee.id}
                         employee={employee} 
                     />
                 })
@@ -48,6 +48,7 @@ export default class extends React.Component {
                     font-size: 2.5rem;
                     color: white;
                     margin: 0;
+                    cursor: default;
                 }
                 ul {
                     list-style-type: none;
@@ -61,6 +62,7 @@ export default class extends React.Component {
                     font-size: 1.2rem;
                     color: white;
                     margin: 0.5rem;
+                    cursor: pointer;
                 }
             `}</style>
         </Layout>
