@@ -17,6 +17,7 @@ const BRACKET_1_TAX = 0.19;
 export default class Employee {
 
     constructor(firstName, lastName, salary, rate, startDate) {
+        this._id = Math.random().toString(36).substring(6);
         this._firstName = firstName;
         this._lastName = lastName;
         this._salary = salary;
@@ -26,6 +27,30 @@ export default class Employee {
         } else {
             this._startDate = moment(startDate, START_DATE_FORMAT);
         }
+    }
+
+    set firstName(fn) {
+        this._firstName = fn;
+    }
+
+    set lastName(ln) {
+        this._lastName = ln;
+    }
+
+    set salary(s) {
+        this._salary = s;
+    }
+
+    set rate(r) {
+        this._rate = r;
+    }
+
+    set startDate(sd) {
+        this._startDate = sd;
+    }
+
+    get id() {
+        return this._id;
     }
 
     get name() {

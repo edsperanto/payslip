@@ -14,7 +14,6 @@ export default class extends React.Component {
         var storedData = window.sessionStorage.getItem("employees");
         if(!!storedData) {
             var originalData = JSON.parse(storedData);
-            console.log(originalData);
             var arrayOfObjs = originalData.map(employee => {
                 let {_firstName, _lastName, _salary, _rate, _startDate} = employee;
                 return new Employee(_firstName, _lastName, _salary, _rate, _startDate);

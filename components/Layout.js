@@ -1,8 +1,9 @@
 // import dependencies
+import React, { Component } from "react";
 import Head from "next/head";
 
-// layout component
-export default class extends React.Component {
+// Layout component
+export default class extends Component {
     render() {
         return <div>
             <Head>
