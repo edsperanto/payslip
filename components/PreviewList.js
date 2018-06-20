@@ -25,7 +25,7 @@ export default class extends Component {
                     margin-right: 2rem;
                 }
                 li {
-                    padding: 0.5rem;
+                    padding: 0.2rem;
                     border: 2px solid LightSeaGreen;
                 }
             `}</style>

@@ -14,7 +14,7 @@ export default class extends Component {
                         display: flex;
                         flex-flow: row wrap;
                         border: 2px solid LightSeaGreen;
-                        padding: 0.5rem;
+                        padding: 0.2rem;
                     }
                     div {
                         margin: 0;

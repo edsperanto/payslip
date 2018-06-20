@@ -29,6 +29,7 @@ export default class extends Component {
                     color: white;
                     margin: 0;
                     cursor: default;
+                    font-weight: 300;
                 }
                 #content {
                     border: 2px solid black;

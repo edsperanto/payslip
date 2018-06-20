@@ -12,11 +12,40 @@ const BRACKET_4_TAX = 0.45;
 const BRACKET_3_TAX = 0.37;
 const BRACKET_2_TAX = 0.325;
 const BRACKET_1_TAX = 0.19;
+const NAME_REGEX = "^[A-z]+$";
+const NUM_REGEX = "^[0-9]+$";
+
 
 // class definition
 export default class Employee {
 
     constructor(firstName, lastName, salary, rate, startDate) {
+        // check for problems
+        this._nameRE = RegExp(NAME_REGEX);
+        this._numRE = RegExp(NUM_REGEX);
+
+        // check empty
+        if(!firstName) throw new Error("Please enter First Name");
+        if(!lastName) throw new Error("Please enter Last Name");
+        if(!salary) throw new Error("Please enter Annual Salary");
+        if(!rate) throw new Error("Please enter Super Rate");
+        if(!startDate) throw new Error("Please enter Payment Start Date");
+
+        // check valid format
+        let validFn = this._nameRE.test(firstName);
+        let validLn = this._nameRE.test(lastName);
+        let validS = this._numRE.test(salary);
+        let validR = this._numRE.test(rate);
+        if(!validFn) throw new Error("Only use the English alphabet for First Name");
+        if(!validLn) throw new Error("Only use the English alphabet for Last Name");
+        if(!validS) throw new Error("Please enter an integer for Annual Salary");
+        if(!validR) throw new Error("Please enter an integer for Payment Start Date");
+
+        // check sanity
+        let rateSmallerThanOne = rate <= 100;
+        if(!rateSmallerThanOne) throw new Error("Super Rate cannot be bigger than 100%");
+
+        // proceed if no problems
         this._id = Math.random().toString(36).substring(6);
         this._firstName = firstName;
         this._lastName = lastName;
@@ -113,7 +142,7 @@ export default class Employee {
     }
 
     get superAmount() {
-        return Math.round(this.grossIncome * this._rate);
+        return Math.round(this.grossIncome * (this._rate/100));
     }
 
 }

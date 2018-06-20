@@ -8,7 +8,7 @@ class AppProvider extends Component {
     state = {
         mode: "New",
         editing: {
-            startDate: "01-01"
+            startDate: "01-01",
         },
         employees: [],
         change: prop => {
@@ -46,17 +46,23 @@ class AppProvider extends Component {
             // prevent default
             e.preventDefault();
             // create new employee
-            let {fn, ln, salary, rate, startDate} = this.state.editing;
-            let emp = new Employee(fn, ln, salary, rate, startDate);
-            // add to employee list
-            let newEmployees = this.state.employees;
-            newEmployees.push(emp);
-            await this.setState({employees: newEmployees});
-            // clear editing and reset form
-            await this.setState({editing: {startDate: "01-01"}});
-            document.getElementById("inputForm").reset();
-            // store in session storage
-            await this.storeInSessionStorage();
+            try {
+                var {fn, ln, salary, rate, startDate} = this.state.editing;
+                var emp = new Employee(fn, ln, salary, rate, startDate);
+                // add to employee list
+                var newEmployees = this.state.employees;
+                newEmployees.push(emp);
+                await this.setState({employees: newEmployees});
+                // clear editing and reset form
+                await this.setState({editing: {startDate: "01-01"}});
+                document.getElementById("inputForm").reset();
+                // store in session storage
+                await this.storeInSessionStorage();
+            } catch(err) {
+                this.setState({editing: Object.assign({},
+                    this.state.editing, { error: err.message }
+                )});
+            }
         },
         submit: async (e) => {
             // prevent default
@@ -147,6 +153,10 @@ class AppProvider extends Component {
         viewResults: e => {
             e.preventDefault();
         }
+    }
+
+    validate() {
+
     }
 
     storeInSessionStorage() {

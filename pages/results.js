@@ -49,6 +49,7 @@ export default class extends React.Component {
                     color: white;
                     margin: 0;
                     cursor: default;
+                    font-weight: 300;
                 }
                 ul {
                     list-style-type: none;
@@ -63,6 +64,7 @@ export default class extends React.Component {
                     color: white;
                     margin: 0.5rem;
                     cursor: pointer;
+                    font-family: 'Open Sans', Verdana, sans-serif;
                 }
             `}</style>
         </Layout>

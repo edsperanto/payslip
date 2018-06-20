@@ -12,7 +12,7 @@ export default class extends Component {
             </Head>
 
             <style global jsx>{`
-                @import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
+                @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
 
                 *:not(ul, li) {
                     top: 0; left: 0;
@@ -27,6 +27,7 @@ export default class extends Component {
                     height: 100%;
                     overflow-x: hidden;
                     font-family: 'Open Sans', Verdana, sans-serif;
+                    font-weight: 300;
                 }
 
                 body {

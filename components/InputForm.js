@@ -10,6 +10,10 @@ export default class extends Component {
 
                 return <form id="inputForm">
                     <div id="input-title">{mode} Employee</div>
+                    {
+                        (!!editing.error) ? 
+                        (<div id="err">{editing.error}</div>) : ""
+                    }
                     <div>
                         <label>First Name: </label>
                         <input onChange={change("fn")} placeholder={fn} />
@@ -25,6 +29,7 @@ export default class extends Component {
                     <div>
                         <label>Super Rate: </label>
                         <input onChange={change("rate")} placeholder={r} />
+                        <label>%</label>
                     </div>
                     <div>
                         <label>Payment Start Date: </label>
@@ -91,11 +96,19 @@ export default class extends Component {
                             color: white;
                             margin-right: 0.5rem;
                             cursor: pointer;
+                            font-family: 'Open Sans', Verdana, sans-serif;
                         }
                         select {
                             margin-left: 1rem;
                             border: 1px solid LightSeaGreen;
                             background-color: white;
+                        }
+                        #err {
+                            background-color: red;
+                            color: white;
+                            padding: 0.2rem;
+                            font-family: 'Open Sans', Verdana, sans-serif;
+                            font-weight: 400;
                         }
                     `}</style>
                 </form>
