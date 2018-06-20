@@ -61,4 +61,4 @@ into your browser address bar.
 
 ### How it's made
 
-This Single Page Application was created using [Node.js](https://nodejs.org/en/), [React](https://reactjs.org/), [Next.js](https://nextjs.org/), and [Moment.js](https://momentjs.com/).
+This Web Application was created using [Node.js](https://nodejs.org/en/), [React](https://reactjs.org/), [Next.js](https://nextjs.org/), and [Moment.js](https://momentjs.com/).
