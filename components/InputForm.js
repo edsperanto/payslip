@@ -28,7 +28,11 @@ export default class extends Component {
                     </div>
                     <div>
                         <label>Payment Start Date: </label>
-                        <select id="monthMenu" name="months">
+                        <select 
+                            id="monthMenu" 
+                            name="months" 
+                            onChange={change("sm")}
+                        >
                             <option value="01">January</option>
                             <option value="02">February</option>
                             <option value="03">March</option>
@@ -42,8 +46,11 @@ export default class extends Component {
                             <option value="11">November</option>
                             <option value="12">December</option>
                         </select>
-                        <select id="dateMenu" name="dates"></select>
-                        <input onChange={change("startDate")} placeholder={sd}/>
+                        <select 
+                            id="dateMenu" 
+                            name="dates" 
+                            onChange={change("sd")} 
+                        />
                     </div>
                     { (mode == "New") ? (
                         <div>

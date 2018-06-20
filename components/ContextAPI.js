@@ -7,15 +7,39 @@ class AppProvider extends Component {
 
     state = {
         mode: "New",
-        editing: {},
+        editing: {
+            startDate: "01-01"
+        },
         employees: [],
         change: prop => {
-            return e => {
-                let value = e.target.value;
-                e.preventDefault();
-                this.setState({editing: Object.assign({},
-                    this.state.editing, { [prop]: value }
-                )});
+            if(prop == "sm") { // select month
+                return e => {
+                    let month = e.target.value;
+                    let date = this.state.editing.startDate.substr(2, 3);
+                    e.preventDefault();
+                    let newStartDate = month + date;
+                    this.setState({editing: Object.assign({},
+                        this.state.editing, { startDate: newStartDate }
+                    )});
+                }
+            } else if(prop == "sd") { // select date
+                return e => {
+                    let month = this.state.editing.startDate.substr(0, 3);
+                    let date = e.target.value;
+                    e.preventDefault();
+                    let newStartDate = month + date;
+                    this.setState({editing: Object.assign({},
+                        this.state.editing, { startDate: newStartDate }
+                    )});
+                }
+            } else {
+                return e => {
+                    let value = e.target.value;
+                    e.preventDefault();
+                    this.setState({editing: Object.assign({},
+                        this.state.editing, { [prop]: value }
+                    )});
+                }
             }
         },
         create: async (e) => {
@@ -29,7 +53,7 @@ class AppProvider extends Component {
             newEmployees.push(emp);
             await this.setState({employees: newEmployees});
             // clear editing and reset form
-            await this.setState({editing: {}});
+            await this.setState({editing: {startDate: "01-01"}});
             document.getElementById("inputForm").reset();
             // store in session storage
             await this.storeInSessionStorage();
@@ -50,7 +74,7 @@ class AppProvider extends Component {
                 return employee;
             });
             // clear editing and revert to new employee mode
-            await this.setState({editing: {}});
+            await this.setState({editing: {startDate: "01-01"}});
             await this.setState({mode: "New"});
             // reset form
             document.getElementById("inputForm").reset();
@@ -61,7 +85,7 @@ class AppProvider extends Component {
             // prevent default
             e.preventDefault();
             // clear editing and revert to new employee mode
-            await this.setState({editing: {}});
+            await this.setState({editing: {startDate: "01-01"}});
             await this.setState({mode: "New"});
             // reset form
             document.getElementById("inputForm").reset();
@@ -73,7 +97,7 @@ class AppProvider extends Component {
             this.setState({mode: "Edit"});
             // populate form
             let id = e.target.parentElement.id;
-            this.state.employees.forEach(async (employee) => {
+            await this.state.employees.forEach(async (employee) => {
                 if(employee.id == id) {
                     let {
                         _firstName: fn, 
@@ -87,6 +111,24 @@ class AppProvider extends Component {
                     await this.setState({editing: Object.assign({},
                         this.state.editing, editEmployee
                     )});
+                }
+            });
+            // pre-select month and date
+            var monthMenu = document.getElementById("monthMenu");
+            var dateMenu = document.getElementById("dateMenu");
+            var startDate = this.state.editing.startDate;
+            Array.prototype.forEach.call(monthMenu.children, month => {
+                if(month.value == startDate.substr(0, 2)) {
+                    month.selected = true;
+                } else {
+                    month.selected = false;
+                }
+            });
+            Array.prototype.forEach.call(dateMenu.children, date => {
+                if(date.value == startDate.substr(3, 2)) {
+                    date.selected = true;
+                } else {
+                    date.selected = false;
                 }
             });
         },
@@ -155,7 +197,7 @@ class AppProvider extends Component {
             frag.innerHTML = "";
             for(let i = 1; i <= numDates; i++) {
                 let op = document.createElement("option");
-                op.value = i;
+                op.value = (i < 10) ? ("0" + i) : i;
                 op.innerText = i;
                 frag.appendChild(op);
             }
