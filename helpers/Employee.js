@@ -39,7 +39,7 @@ export default class Employee {
         if(!validFn) throw new Error("Only use the English alphabet for First Name");
         if(!validLn) throw new Error("Only use the English alphabet for Last Name");
         if(!validS) throw new Error("Please enter an integer for Annual Salary");
-        if(!validR) throw new Error("Please enter an integer for Payment Start Date");
+        if(!validR) throw new Error("Please enter an integer for Super Rate");
 
         // check sanity
         let rateSmallerThanOne = rate <= 100;
